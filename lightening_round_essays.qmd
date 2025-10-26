@@ -6,16 +6,22 @@ editor: visual
 
 **Answer each of the following questions with *one sentence* including a brief explanation.**
 
-1. Finish the sentence with another student’s name: "If [Name of Student] doesn’t earn an A, then nobody should, because..." Explain your choice and your reasoning.
+1.  Finish the sentence with another student’s name: "If \[Name of Student\] doesn’t earn an A, then nobody should, because..." Explain your choice and your reasoning.
 
+    If Sam doesn’t earn an A, then nobody should, because he is always willing to help others, not afraid to ask questions, and on top of his work in this class.
 
-2. What was the most difficult part of the class for you? List a general topic, a specific problem, a kind of work we did, etc. and explain why.
+2.  What was the most difficult part of the class for you? List a general topic, a specific problem, a kind of work we did, etc. and explain why.
 
+    The most difficult part of the class for me was learning the different functions because I had little coding background so a lot of it felt very new. It generally felt like it took me a long time to fully understand each topic and how to correctly combine them with past lectures.
 
-3. What was the easiest part of the class for you? Explain why.
+3.  What was the easiest part of the class for you? Explain why.
 
+    I wouldn't say there was an easiest part of the class, however I enjoyed playing around with the ggplots because I felt I could be more creative with it. I also feel that generally filtering was more intuitive than other topics.
 
-4. What part of the class surprised or interested you the most? Explain why.
+4.  What part of the class surprised or interested you the most? Explain why.
 
+    I was most interested in creating the different plots even though they were difficult. I also liked Lab 5 where you are filtering and pulling information to figure out the culprit. Plots felt fun and creative while I like the systematic step by step of Lab 5.
 
-5. Give one piece of advice to a student just beginning a quarter of STAT 331 that will help them be successful in learning.
+5.  Give one piece of advice to a student just beginning a quarter of STAT 331 that will help them be successful in learning.
+
+    One piece of advice I have is that staying on top of your work is very important and making sure that the labs and challenges don't pile up before the due date. This will make it easier to understand and grasp the concepts so that you don't feel rushed when coding.
