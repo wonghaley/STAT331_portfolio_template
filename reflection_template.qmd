@@ -10,7 +10,11 @@ execute:
   echo: true
 ---
 
+<<<<<<< HEAD
 [**My Grade:**]{.underline} I believe my grade equivalent to course work evidenced below to be an A.
+=======
+[**My Grade:**]{.underline} I believe my grade equivalent to course work evidenced below to be an B.
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 [**Learning Objective Evidence:**]{.underline} In the code chunks below, provide code from Lab or Challenge assignments where you believe you have demonstrated proficiency with the specified learning target. Be sure to specify **where** the code came from (e.g., Lab 4 Question 2).
 
@@ -22,6 +26,10 @@ execute:
 
 ```{r}
 #| label: wd-1-csv-1
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 # Lab 2 Question 1
 surveys <- read_csv(here::here("Week 2", "Labs", "surveys.csv"))
 ```
@@ -68,6 +76,29 @@ teacher_evals_compare <- teacher_evals |>
   select(course_id, SET_level, sen_level)
 
 teacher_evals_compare
+
+# Lab 3 Question 5
+teacher_evals_clean <- teacher_evals |>
+    rename(sex = "gender") |>
+  group_by(course_id) |>
+  mutate(
+    course_participants = sum(no_participants)
+  ) |>
+  filter(course_participants > 10) |>
+  ungroup() |>
+  mutate(across(c(teacher_id, question_no, academic_degree, sex), as.factor)) |>
+  select(
+    course_id,
+    teacher_id,
+    question_no,
+    no_participants,
+    resp_share,
+    SET_score_avg,
+    percent_failed_cur,
+    academic_degree,
+    seniority,
+    sex
+  )
 
 ```
 
@@ -132,6 +163,7 @@ missing_by_group <- fish |>
 ```{r}
 #| label: wd-3-numeric-ex-1
 
+<<<<<<< HEAD
 #Lab 4 Question 5
 ca_childcare |>
   filter(study_year %in% c(2008, 2018)) |>
@@ -144,6 +176,18 @@ ca_childcare |>
         names_prefix = "median_income_for_year_") |>
 
 arrange(desc('median_income_for_year_2018'))
+=======
+#Lab 5
+suspect2 <- facebook_event_checkin |>
+  filter(event_name == "SQL Symphony Concert",
+         date >= 20171201, date <= 20171231) |>
+  inner_join(person, by = c("person_id" = "id"))|>
+  inner_join(drivers_license, by = c("license_id" = "id"))|>
+  filter(hair_color == "red",
+         car_make == "Tesla",
+         car_model == "Model S",
+         height >= 64, height <= 66)
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 ```
 
@@ -202,11 +246,27 @@ crime_scene_report |>
 
 ```{r}
 #| label: wd-4-numeric-ex-1
+<<<<<<< HEAD
 #Challenge 4
   group_by(study_year, age, type) |>
   summarise(median_price = median(median_price, na.rm = TRUE), .groups = "drop") |>
   pivot_wider(names_from = type, values_from = median_price) |>
   mutate(difference = center_based - family)
+=======
+# Lab 4 Question 5
+
+ca_childcare |>
+  filter(study_year %in% c(2008, 2018)) |>
+  group_by(region, study_year) |>
+  summarise(median_income = median(mhi_2018, na.rm = TRUE),
+            .groups = "drop") |>
+  pivot_wider(
+        names_from = study_year,
+        values_from = median_income,
+        names_prefix = "median_income_for_year_") |>
+
+arrange(desc('median_income_for_year_2018'))
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 ```
 
@@ -327,6 +387,7 @@ ca_childcare |>
 
 ```{r}
 #| label: wd-4-string
+<<<<<<< HEAD
 #Challenge 4
 table <- ca_childcare |>
   pivot_longer(
@@ -345,6 +406,12 @@ table <- ca_childcare |>
       str_detect(type_age, "preschool$") ~ "preschool"
     )
   ) 
+=======
+# Lab 5
+w2 <- person |>
+  filter(address_street_name == "Franklin Ave",
+         str_detect(name, "^Annabel"))
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 ```
 
 -   Date (example must use functions from **lubridate**)
@@ -369,10 +436,19 @@ crime_scene_report |>
 ```{r}
 #| label: wd-5-left-ex-1
 
+<<<<<<< HEAD
 #Lab 4 Question 2
 ca_childcare <- counties |>
   filter(state_name == "California") |>
   left_join(y = childcare_costs, by = "county_fips_code")
+=======
+#Lab 5
+#Revised: switch inner join to left join
+interview |>
+  left_join(person, by = c("person_id" = "id")) |>
+  filter(name == "Morty Schapiro") |>
+  select(name, transcript)
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 ```
 
 -   `right_join()` Example 1
@@ -394,6 +470,7 @@ person |>
 #| label: wd-5-left-right-ex-2
 
 #Lab 5
+<<<<<<< HEAD
 suspect <- get_fit_now_member |>
   left_join(get_fit_now_check_in, 
             join_by (id == membership_id)) |>
@@ -404,6 +481,13 @@ suspect <- get_fit_now_member |>
   filter(membership_status == "gold",
         (check_in_date %in% c(20180109, 20180115)),
         str_detect(plate_number, pattern = "H42W"))
+=======
+#Revised: switch inner join to left join
+interview |>
+  left_join(person, by = c("person_id" = "id")) |>
+  filter(name == "Annabel Miller") |>
+  select(name, transcript)
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 ```
 
 -   `inner_join()` Example 1
@@ -412,9 +496,15 @@ suspect <- get_fit_now_member |>
 #| label: wd-5-inner-ex-1
 # Lab 5
 interview |>
+<<<<<<< HEAD
   inner_join(person, join_by (person_id == id)) |>
   filter(name == (suspect2 |> pull(name))) |>
   pull(transcript)
+=======
+  inner_join(person, by = c("person_id" = "id")) |>
+  filter(name == "Morty Schapiro") |>
+  select(name, transcript)
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 ```
 
@@ -721,6 +811,7 @@ pivot_table <- function(df, row, col) {
 
 ```{r}
 #| label: dvs-1-num
+<<<<<<< HEAD
 #Lab 2 Question 4
   
 ggplot(data = surveys,
@@ -731,12 +822,30 @@ ggplot(data = surveys,
 subtitle = "Body Weight (g)",
 y = "Hindfoot length (mm)", x = "")
 
+=======
+#Lab 4 Question 7
+  
+  ggplot(mapping = aes(x = study_year,
+                       y = cost, 
+                       color = Region)) +
+    geom_point() +
+    geom_smooth(method = "loess") +
+    facet_wrap(~ age_group) +
+  labs(title = "Weekly Median Price for Center-Based Childcare ($)",
+       x = "Study Year",
+       y = "",
+       color = "California Region") +
+  scale_x_continuous(breaks = seq(2008, 2018, by = 2)) +
+  scale_y_continuous(limits = c(100, 500),
+                     breaks = seq(0, 500, by = 100))
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 ```
 
 -   At least one numeric variable and one categorical variable
 
 ```{r}
 #| label: dvs-2-num-cat
+<<<<<<< HEAD
 #Lab 2 Question 8 
 
 ggplot(
@@ -747,6 +856,21 @@ ggplot(
   labs( title = "Distribution of Body Weight by Rodent Species in Portal, Arizona",
   x = "Rodent Species", y = "Weight (g)") +
 theme(axis.text.x = element_text(size = 6))
+=======
+#Challenge 2 
+
+ggplot(
+  data = surveys,
+  mapping = aes( x = species, y = weight, color = sex)) +
+  geom_boxplot (outliers = FALSE) +
+  scale_colour_brewer(palette = "Set1")+
+labs( title = "Distribution of Body Weight by Rodent Species in Portal, Arizona",
+  x = "Rodent Species", 
+  y = "Weight (g)", 
+  color = "Sex") +
+  theme(axis.text.x = element_text(hjust = 1, size = 6)) +
+  theme(legend.position = "none")
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 ```
 
@@ -755,6 +879,7 @@ theme(axis.text.x = element_text(size = 6))
 ```{r}
 #| label: dvs-2-cat
 
+<<<<<<< HEAD
 #Challenge 3
 #Changed to label_percent() instead of percent_format()
 ggplot(data = teacher_evals_compare,
@@ -772,6 +897,50 @@ ggplot(data = teacher_evals_compare,
     standard = "#867052"
   )) +
   scale_y_continuous(labels = scales::label_percent())
+=======
+#Lab 4 Question 7
+
+ca_childcare |>
+  pivot_longer(
+    cols = c(mc_infant, mc_toddler, mc_preschool),
+    names_to = "age_group",
+    values_to = "cost") |>
+  
+  mutate(
+    age_group = recode(age_group,
+                       mc_infant = "Infant",
+                       mc_toddler = "Toddler",
+                       mc_preschool = "Preschool"),
+    
+    Region = recode(region,
+        sf = "San Francisco Bay Area",
+        oc = "Orange County",
+        la = "Los Angeles County",
+        nsj = "Northern San Joaquin Valley",
+        centralcoast = "Central Coast",
+        inland = "Inland Empire",
+        superior = "Superior California",
+        ssj = "Southern San Joaquin Valley",
+        sd = "San Diego-Imperial",
+        northcoast = "North Coast"),
+    
+    Region = fct_reorder2(Region, study_year, cost)
+  ) |>
+  
+  ggplot(mapping = aes(x = study_year,
+                       y = cost, 
+                       color = Region)) +
+    geom_point() +
+    geom_smooth(method = "loess") +
+    facet_wrap(~ age_group) +
+  labs(title = "Weekly Median Price for Center-Based Childcare ($)",
+       x = "Study Year",
+       y = "",
+       color = "California Region") +
+  scale_x_continuous(breaks = seq(2008, 2018, by = 2)) +
+  scale_y_continuous(limits = c(100, 500),
+                     breaks = seq(0, 500, by = 100))
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 ```
 
@@ -780,6 +949,7 @@ ggplot(data = teacher_evals_compare,
 ```{r}
 #| label: dvs-2-date
 
+<<<<<<< HEAD
 #Lab 7 Question 3
 
 missing_by_group <- fish |>
@@ -816,6 +986,50 @@ ggplot(missing_by_group,
     panel.grid = element_blank(),
     strip.text = element_text(face = "bold", size = 10)
   )
+=======
+#Lab 4 Question 7
+
+ca_childcare |>
+  pivot_longer(
+    cols = c(mc_infant, mc_toddler, mc_preschool),
+    names_to = "age_group",
+    values_to = "cost") |>
+  
+  mutate(
+    age_group = recode(age_group,
+                       mc_infant = "Infant",
+                       mc_toddler = "Toddler",
+                       mc_preschool = "Preschool"),
+    
+    Region = recode(region,
+        sf = "San Francisco Bay Area",
+        oc = "Orange County",
+        la = "Los Angeles County",
+        nsj = "Northern San Joaquin Valley",
+        centralcoast = "Central Coast",
+        inland = "Inland Empire",
+        superior = "Superior California",
+        ssj = "Southern San Joaquin Valley",
+        sd = "San Diego-Imperial",
+        northcoast = "North Coast"),
+    
+    Region = fct_reorder2(Region, study_year, cost)
+  ) |>
+  
+  ggplot(mapping = aes(x = study_year,
+                       y = cost, 
+                       color = Region)) +
+    geom_point() +
+    geom_smooth(method = "loess") +
+    facet_wrap(~ age_group) +
+  labs(title = "Weekly Median Price for Center-Based Childcare ($)",
+       x = "Study Year",
+       y = "",
+       color = "California Region") +
+  scale_x_continuous(breaks = seq(2008, 2018, by = 2)) +
+  scale_y_continuous(limits = c(100, 500),
+                     breaks = seq(0, 500, by = 100))
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 ```
 
 **DVS-2: I use plot modifications to make my visualization clear to the reader.**
@@ -824,8 +1038,42 @@ ggplot(missing_by_group,
 
 ```{r}
 #| label: dvs-2-ex-1
+<<<<<<< HEAD
 #Challenge 4 
 #Edited so not nested
+=======
+#Challenge 4
+
+ggplot(prices_long, aes(x = study_year, y = median_price, color = setting_label)) +
+  geom_ribbon(
+    data = table |> 
+      mutate(age = factor(age, levels = c("infant", "toddler", "preschool"))),
+    aes(x = study_year, ymin = family, ymax = center_based, fill = "Price Gap"),
+    alpha = 0.15,
+    inherit.aes = FALSE
+  ) +
+  geom_line(size = 1.2) +
+  geom_point(size = 2.5, alpha = 0.9) +
+  facet_wrap(~ age, nrow = 1) +
+  scale_color_brewer(palette = "Set2") +
+  scale_fill_manual(values = c("Price Gap" = "gray70")) +
+  scale_y_continuous(labels = scales::label_dollar()) +
+  scale_x_continuous(breaks = seq(2008, 2018, 2)) +
+  labs(
+    title = "Center-Based vs Family Childcare Costs Over Time",
+    subtitle = "Shaded area shows median price gap by age group (California)",
+    x = "Study Year",
+    y = "Median Weekly Price (USD)",
+    color = "Care Setting",
+    fill = ""
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    plot.subtitle = element_text(size = 13, hjust = 0.5),
+    legend.position = "right"
+  )
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 table_processed <- table |>
   mutate(age = factor(age, levels = c("infant", "toddler", "preschool")))
@@ -881,7 +1129,11 @@ ggplot(prices_long, aes(x = study_year, y = median_price, color = setting_label)
   facet_wrap(~ age, nrow = 1) +
   scale_color_brewer(palette = "Set2") +
   scale_fill_manual(values = c("Price Gap" = "gray70")) +
+<<<<<<< HEAD
   scale_y_continuous(labels = scales::label_currency()) +
+=======
+  scale_y_continuous(labels = scales::label_dollar()) +
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
   scale_x_continuous(breaks = seq(2008, 2018, 2)) +
   labs(
     title = "Center-Based vs Family Childcare Costs Over Time",
@@ -992,7 +1244,11 @@ ca_childcare |>
 ```{r}
 #| label: dvs-3-1-ex-1
 #Challenge 3
+<<<<<<< HEAD
 #Changed to label_percent() instead of percent_format()
+=======
+
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 ggplot(data = teacher_evals_compare,
        mapping = aes(x = sen_level, fill = SET_level)) +
   geom_bar(position = "fill") +
@@ -1007,7 +1263,11 @@ ggplot(data = teacher_evals_compare,
     excellent = "#837099",
     standard = "#867052"
   )) +
+<<<<<<< HEAD
   scale_y_continuous(labels = scales::label_percent())
+=======
+  scale_y_continuous(labels = scales::percent_format())
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 ```
 
@@ -1065,6 +1325,7 @@ ggplot(missing_by_group,
 ```{r}
 #| label: dvs-3-3
 
+<<<<<<< HEAD
 #Challenge 4 
 #Edited so not nested
 
@@ -1074,17 +1335,31 @@ table_processed <- table |>
 ggplot(prices_long, aes(x = study_year, y = median_price, color = setting_label)) +
   geom_ribbon(
     data = table_processed,
+=======
+#Challenge 4
+ggplot(prices_long, aes(x = study_year, y = median_price, color = setting_label)) +
+  geom_ribbon(
+    data = table |> 
+      mutate(age = factor(age, levels = c("infant", "toddler", "preschool"))),
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
     aes(x = study_year, ymin = family, ymax = center_based, fill = "Price Gap"),
     alpha = 0.15,
     inherit.aes = FALSE
   ) +
+<<<<<<< HEAD
  
+=======
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
   geom_line(size = 1.2) +
   geom_point(size = 2.5, alpha = 0.9) +
   facet_wrap(~ age, nrow = 1) +
   scale_color_brewer(palette = "Set1") +
   scale_fill_manual(values = c("Price Gap" = "gray70")) +
+<<<<<<< HEAD
   scale_y_continuous(labels = scales::label_currency()) +
+=======
+  scale_y_continuous(labels = scales::label_dollar()) +
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
   scale_x_continuous(breaks = seq(2008, 2018, 2)) +
   labs(
     title = "Center-Based vs Family Childcare Costs Over Time",
@@ -1094,7 +1369,10 @@ ggplot(prices_long, aes(x = study_year, y = median_price, color = setting_label)
     color = "Care Setting",
     fill = ""
   ) +
+<<<<<<< HEAD
   
+=======
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
   theme_minimal(base_size = 14) +
   theme(
     plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
@@ -1109,6 +1387,7 @@ ggplot(prices_long, aes(x = study_year, y = median_price, color = setting_label)
 
 ```{r}
 #| label: dvs-4-summarize
+<<<<<<< HEAD
 #Lab 3 Question 11
 teacher_evals_clean |>
   filter(seniority == 1) |>
@@ -1119,6 +1398,20 @@ teacher_evals_clean |>
   ungroup() |>
   filter(
     avg_percent_fail == min(avg_percent_fail) | avg_percent_fail == max(avg_percent_fail)
+=======
+#Lab 3 Question 12
+teacher_evals_clean |>
+  filter(
+    academic_degree %in% c('dr', 'prof')
+  ) |>
+  group_by(teacher_id, seniority, sex) |>
+  summarise(
+    avg_response = mean(resp_share, na.rm = TRUE)
+  ) |>
+  ungroup() |>
+  filter(
+    avg_response == min(avg_response) | avg_response == max(avg_response)
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
   )
 
 ```
@@ -1127,6 +1420,7 @@ teacher_evals_clean |>
 
 ```{r}
 #| label: dvs-4-across
+<<<<<<< HEAD
 #Lab 7 Question 1
 missing_table <- fish|>
   summarize(
@@ -1134,6 +1428,30 @@ missing_table <- fish|>
       everything(), ~sum(is.na(.)),
       .names = "missing_{.col}")
   )
+=======
+#Lab 3 Question 10
+#Revised to use across
+
+teacher_evals_clean |>
+  filter(question_no == 901) |>
+  select(teacher_id, course_id, SET_score_avg) |>
+  group_by(teacher_id) |>
+  mutate(no_courses_taught = n_distinct(course_id)) |>
+  filter(no_courses_taught >= 5) |>
+  summarise(
+    across(
+      SET_score_avg,
+      mean,
+      na.rm = TRUE,
+      .names = "avg_rating"
+    ),
+    .groups = "drop"
+  ) |>
+  filter(
+    avg_rating == min(avg_rating) | avg_rating == max(avg_rating)
+  ) |>
+  arrange(avg_rating)
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 ```
 
 **DVS-5: I can find summaries of variables across multiple groups.**
@@ -1620,7 +1938,11 @@ summary(reg_mod1)
 
 <!-- How did you revise your thinking throughout the course? How did you revise your thinking on the code examples you have provided in your portfolio? -->
 
+<<<<<<< HEAD
 Throughout the course I have revised my thinking after incorporating the comments and feedback from labs and challenges. I would review past lectures, notes, and in-class assignments to help with my thinking on the labs and challenges. Overall, fixing the parts of the labs and challenges have helped me learn and grow because I would get the chance to fix parts of my code that I may have not originally thought could work a different way. This portfolio incorporates new thinking in some parts and my new codes from the assignments after fixing them. Most of my revisions were resubmitted but some of them I changed for the portfolio and noted the changes such as in dvs-2-ex-5 #Revised code: fixed the ordering and the labeling for region. made code not an object.
+=======
+Throughout the course I have revised my thinking after incorporating the comments and feedback from labs and challenges. I would review past lectures, notes, and in-class assignments to help with my thinking on the labs and challenges. Overall, fixing the parts of the labs and challenges have helped me learn and grow because I would get the chance to fix parts of my code that I may have not originally thought could work a different way. This portfolio incorporates new thinking in some parts and my new codes from the assignments after fixing them.
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 <!-- For the revisions included in your Portfolio, to help me understand the nature of your revisions, please denote somehow the feedback I provided you (e.g., boldface, italics, colored text) before your revisions. -->
 
@@ -1628,7 +1950,11 @@ Throughout the course I have revised my thinking after incorporating the comment
 
 <!-- How did you extended your thinking throughout the course? How did you extend your thinking on the code examples you have provided in your portfolio? -->
 
+<<<<<<< HEAD
 With the challenges assignments, I was able to extend my thinking by approaching the tasks from different perspectives. I was able to apply what I had learned in class from the lecture and collaborative assignments to these assignments. In the portfolio, I tried to incorporate a variety of different codes from the assignments I have completed to show how I extended my thinking. I was able to edit my code such as changing the different joins as well as utilize resources like ChatGPT and R Documentation to learn more about the different functions.
+=======
+With the challenges assignments, I was able to extend my thinking by approaching the tasks from different perspectives. I was able to apply what I had learned in class from the lecture and collaborative assignments to these assignments. In the portfolio, I tried to incorporate a variety of different codes from the assignments I have completed to show how I extended my thinking.
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 ## Peer Support & Collaboration
 
@@ -1636,12 +1962,19 @@ With the challenges assignments, I was able to extend my thinking by approaching
 
 <!-- Include a description of how you grew as a collaborator through the weekly pair programming activities.   -->
 
+<<<<<<< HEAD
 In class, I collaborate with my peers through the practice activities where we are able to converse both of our perspectives of the code and the approaches we think of. I was able to learn how to explain how my own thought process as well as practice new ways to code through my partner. Additionally, I have done peer reviews every week.
+=======
+In class, I collaborate with my peers through the practice activities where we are able to converse both of our perspectives of the code and the appraches we think of. I was able to learn how to explain how my own thought process as well as practice new ways to code through my partner. Additionally, I have done peer reviews every week.
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
 
 I thought my peer review for Lab 4 was clean and fairly thoughtful since I did not see much error:
 
 I would like to start off by saying I really like your theme because it makes it very easy to clearly read everything. I also liked your consistent spacing around = and also moving to new lines after commas where needed. Your code is nicely organized and easy to read and it looks like you didn't create any unnecessary objects. One thing for your plot that you recreated is that you could try to make it wider rather than taller but other than that it looks really clean.
+<<<<<<< HEAD
 
 Also my peer review for Lab 7:
 
 I think your code is well organized, clean, and consistent especially for your answers for the first two questions. Your separation between the lines made it easier to read the code. For question three, I feel like for your ggplot line, you could have also put it into multiple lines to help make it easier to read the code and I think the title could be a bit clearer. Overall, I think your code is very solid and well organized.
+=======
+>>>>>>> 8e150daf907c21a1c365bb49014bbbf8997da269
